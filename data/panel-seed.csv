@@ -1,0 +1,4 @@
+id,section,row,column,installationYear,material,tracking
+1,Main,1,1,2018,CIGS,true
+2,Upper Hill,1,2,2014,AmorSi,true
+3,Lower Hill,2,3,2017,CdTe,false

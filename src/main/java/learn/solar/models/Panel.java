@@ -21,6 +21,9 @@ public class Panel {
         this.tracking = tracking;
     }
 
+    public Panel() {
+    }
+
     public int getId() {
         return id;
     }
