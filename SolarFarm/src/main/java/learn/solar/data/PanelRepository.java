@@ -1,15 +1,16 @@
 package learn.solar.data;
 
 import learn.solar.models.Panel;
+import learn.solar.models.Material;
 
 import java.util.List;
 
 public interface PanelRepository {
-    public List<Panel> findBySection(String section);
+    public List<Panel> findBySection(String section) throws DataException;
 
-    public Panel add(Panel panel);
+    public Panel add(Panel panel) throws DataException;
 
-    public boolean update(Panel panel);
+    public boolean update(Panel panel) throws DataException;
 
-    public boolean deleteById(int id);
+    public boolean deleteById(int id) throws DataException;
 }

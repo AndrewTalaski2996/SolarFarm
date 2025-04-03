@@ -6,8 +6,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class PanelFileRepository implements PanelRepository {
+    private static final String DELIMITER = ",";
+    private static final String DELIMITER_REPLACEMENT = "@@@";
+    private static final String HEADER = "id,section,row,column,installationDate,material,tracking";
+    private final String filePath;
 
-    private String filePath;
+    public PanelFileRepository(String filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
     public List<Panel> findBySection(String section) {
@@ -32,6 +38,23 @@ public class PanelFileRepository implements PanelRepository {
     private List<Panel> findAll() {
 
         return Collections.emptyList();
+    }
+
+    //Helper methods
+    private int getNextId(List<Panel> panels) {
+        return 0;
+    }
+
+    private void writeAll(List<Panel> panels) throws DataException {
+
+    }
+
+    private String clean(String value) {
+        return null;
+    }
+
+    private String restore(String value) {
+        return null;
     }
 
     private String serialize(Panel panel) {

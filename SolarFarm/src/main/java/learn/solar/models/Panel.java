@@ -1,5 +1,7 @@
 package learn.solar.models;
 
+import java.util.Objects;
+
 public class Panel {
     private int id;
     private String section;
@@ -8,6 +10,16 @@ public class Panel {
     private int installationYear;
     private Material material;
     private boolean tracking;
+
+    public Panel(int id, String section, int row, int column, int installationYear, Material material, boolean tracking) {
+        this.id = id;
+        this.section = section;
+        this.row = row;
+        this.column = column;
+        this.installationYear = installationYear;
+        this.material = material;
+        this.tracking = tracking;
+    }
 
     public int getId() {
         return id;
@@ -67,11 +79,16 @@ public class Panel {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(id, section, row, column, installationYear, material, tracking);
     }
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Panel panel = (Panel) o;
+        return id == panel.id && Objects.equals(section, panel.section) &&
+                row == panel.row && column == panel.column && installationYear == panel.installationYear &&
+                Objects.equals(material, panel.material) && tracking == panel.tracking;
     }
 }
