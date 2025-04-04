@@ -14,6 +14,10 @@ public class PanelService {
         this.repository = repository;
     }
 
+    public List<Panel> findAll() throws DataException {
+        return repository.findAll();
+    }
+
     public List<Panel> findBySection(String section) throws DataException {
         return repository.findBySection(section);
     }

@@ -63,6 +63,7 @@ public class PanelFileRepository implements PanelRepository {
         return false;
     }
 
+    @Override
     public List<Panel> findAll() throws DataException {
         List<Panel> all = new ArrayList<>();
 
