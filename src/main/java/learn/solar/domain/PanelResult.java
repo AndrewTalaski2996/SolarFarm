@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PanelResult {
-    private ArrayList<String> messages;
+    private ArrayList<String> messages = new ArrayList<>();
     private Panel panel;
 
     public boolean isSuccess() {
-        return false;
+        return messages.isEmpty();
     }
 
     public List<String> getMessages() {
@@ -26,6 +26,6 @@ public class PanelResult {
     }
 
     public void addMessage(String message) {
-
+        messages.add(message);
     }
 }
