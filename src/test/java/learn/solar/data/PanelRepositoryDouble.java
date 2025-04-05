@@ -8,8 +8,8 @@ import java.util.List;
 
 public class PanelRepositoryDouble implements PanelRepository{
 
-    //Private helper method
-    private List<Panel> findAll() {
+    @Override
+    public List<Panel> findAll() {
         List<Panel> panels = new ArrayList<>();
         panels.add(new Panel(1,"Main",3,4,2017, Material.CdTe, false));
         panels.add(new Panel(2, "Lower Hill", 2, 3, 2013, Material.MonoSi, false));

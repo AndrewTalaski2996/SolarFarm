@@ -136,6 +136,14 @@ class PanelServiceTest {
     }
 
     @Test
+    void shouldNotUpdatePanelWithUnknownSection() throws DataException {
+        Panel panel = new Panel(0, "Fake", 1, 1, 2017, Material.CIGS, true);
+        PanelResult actual = service.update(panel);
+        assertFalse(actual.isSuccess());
+        assertEquals(1, actual.getMessages().size());
+    }
+
+    @Test
     void shouldNotUpdateUnknownPanel() throws DataException {
         Panel panel = new Panel(0, "Main", 1, 1, 2017, Material.CIGS, true);
         PanelResult actual = service.update(panel);

@@ -1,6 +1,7 @@
 package learn.solar.domain;
 
 import learn.solar.data.DataException;
+import learn.solar.data.PanelFileRepository;
 import learn.solar.data.PanelRepository;
 import learn.solar.models.Panel;
 
@@ -52,6 +53,19 @@ public class PanelService {
         if (!result.isSuccess()) {
             return result;
         }
+
+        boolean sectionIsValid = false;
+        for (Panel p : repository.findAll()) {
+            if (p.getSection().equalsIgnoreCase(panel.getSection())) {
+                sectionIsValid = true;
+                break;
+            }
+        }
+        if (!sectionIsValid) {
+            result.addMessage("Section does not exist.");
+            return result;
+        }
+
         boolean updated = repository.update(panel);
         if (!updated) {
             result.addMessage("Panel does not exist.");
@@ -67,7 +81,7 @@ public class PanelService {
         return result;
     }
 
-    private PanelResult validate(Panel panel) {
+    private PanelResult validate(Panel panel) throws DataException {
         PanelResult result = new PanelResult();
 
         if (panel == null) {
@@ -76,23 +90,18 @@ public class PanelService {
         }
         if (panel.getSection() == null || panel.getSection().isBlank()) {
             result.addMessage("Section is required.");
-            return result;
         }
         if (panel.getRow() < 1 || panel.getRow() > 250) {
             result.addMessage("Row must be a positive value less than 250.");
-            return result;
         }
         if (panel.getColumn() < 1 || panel.getColumn() > 250) {
             result.addMessage("Column must be a positive value less than 250.");
-            return result;
         }
         if (panel.getInstallationYear() >= Year.now().getValue()) {
             result.addMessage("Installation Year must be a date before " + Year.now().getValue());
-            return result;
         }
         if (panel.getMaterial() == null) {
             result.addMessage("Material is required.");
-            return result;
         }
 
         return result;
