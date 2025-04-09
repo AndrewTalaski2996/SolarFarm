@@ -44,8 +44,8 @@ public class View {
     }
 
     public Panel choosePanel(String sectionName, List<Panel> panels) {
-        int row = readInt("Enter a Row: ");
-        int col = readInt("Enter a Column: ");
+        int row = readInt("Enter a Row: ", 251);
+        int col = readInt("Enter a Column: ", 251);
 
         for (Panel p : panels) {
             if (p.getSection().equalsIgnoreCase(sectionName) && p.getRow() == row && p.getColumn() == col) {
@@ -59,8 +59,8 @@ public class View {
     public Panel makePanel() {
         Panel panel = new Panel();
         panel.setSection(readRequiredString("Section: "));
-        panel.setRow(readInt("Row: "));
-        panel.setColumn(readInt("Column: "));
+        panel.setRow(readInt("Row: ", 251));
+        panel.setColumn(readInt("Column: ", 251));
         panel.setInstallationYear(readInt("Installation year: "));
         panel.setMaterial(readMaterial("Material: "));
         String trackingOption = readRequiredString("Tracking [y/n]: ");
@@ -94,13 +94,11 @@ public class View {
         int installYear = readInt("Installation Year (" + panel.getInstallationYear() + "): ");
         if (installYear != 0) {
             panel.setInstallationYear(installYear);
-
         }
 
         String track = readRequiredString("Tracked (" + panel.isTracking() + "): ");
         if (!track.isBlank()) {
             panel.setTracking(Boolean.parseBoolean(track));
-
         }
         return panel;
     }
@@ -122,7 +120,7 @@ public class View {
             displayText("You must enter a value.");
             string = readRequiredString(prompt);
         }
-        if (prompt.contains("Track") && (!string.equalsIgnoreCase("Y") && !string.equalsIgnoreCase("N"))) {
+        if (prompt.contains("[y/n]") && (!string.equalsIgnoreCase("Y") && !string.equalsIgnoreCase("N"))) {
             displayText("Please choose either Y for yes, or N for no.");
             string = readRequiredString(prompt);
         }
@@ -180,9 +178,9 @@ public class View {
     }
 
     private Material readMaterial(String prompt) {
+        displayText(prompt);
         while(true) {
-            displayText(prompt);
-            displayText("Suitable materials are: MULTISI, MONOSI, AMORSI, CDTE, or CIGS");
+            displayText("Suitable materials are: MULTISI, MONOSI, AMORSI, CDTE, or CIGS: ");
             String mat = console.nextLine();
             if (mat.isBlank()) {
                 return null;

@@ -59,7 +59,18 @@ public class Controller {
         //calls readSection on input
         view.printHeader("Find Panels by Section");
         String section = view.readSection("Section Name: ");
-        view.printPanels(section, service.findAll());
+        boolean sectionExists = false;
+        for (Panel panel : service.findAll()) {
+            if (panel.getSection().equalsIgnoreCase(section)) {
+                sectionExists = true;
+                break;
+            }
+        }
+        if (sectionExists) {
+            view.printPanels(section, service.findAll());
+        } else {
+            view.displayText("That section does not exist yet.");
+        }
     }
 
     private void addPanel() throws DataException {
