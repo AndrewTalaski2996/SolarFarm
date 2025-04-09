@@ -12,12 +12,7 @@ public class View {
     private final Scanner console = new Scanner(System.in);
 
     public int chooseOptionFromMenu() {
-        displayText("0. Exit");
-        displayText("1. Find Panel by Section");
-        displayText("2. Add a Panel");
-        displayText("3. Update a Panel");
-        displayText("4. Remove a Panel");
-        return readInt("Select [0-4]: ", 4);
+        return readInt("0. Exit\n1. Find Panel by Section\n2. Add a Panel\n3. Update a Panel\n4. Remove a Panel\nSelect [0-4]: ", 4);
     }
 
     public void printHeader(String header) {
@@ -57,6 +52,7 @@ public class View {
                 return p;
             }
         }
+
         return null;
     }
 
@@ -71,8 +67,6 @@ public class View {
         if (trackingOption.equalsIgnoreCase("y")) {
             panel.setTracking(true);
         } else if (trackingOption.equalsIgnoreCase("n")) {
-            panel.setTracking(false);
-        } else {
             panel.setTracking(false);
         }
         return panel;
@@ -128,6 +122,10 @@ public class View {
             displayText("You must enter a value.");
             string = readRequiredString(prompt);
         }
+        if (prompt.contains("Track") && (!string.equalsIgnoreCase("Y") && !string.equalsIgnoreCase("N"))) {
+            displayText("Please choose either Y for yes, or N for no.");
+            string = readRequiredString(prompt);
+        }
         return string;
     }
 
@@ -143,6 +141,9 @@ public class View {
                 if (val > Year.now().getValue()) {
                     displayText("[Err]");
                     displayText("Value must be in the past.");
+                } else if (val < 0) {
+                    displayText("[Err]");
+                    displayText("Value cannot be negative.");
                 } else {
                     return val;
                 }
@@ -162,8 +163,13 @@ public class View {
             try {
                 int intVal = Integer.parseInt(string);
                 if (intVal < 0 || intVal > max) {
-                    displayText("[Err]");
-                    displayText("Value must be between 1 and 250.");
+                    if (prompt.contains("Select")) {
+                        displayText("[Err]");
+                        displayText("Please choose a valid option.");
+                    } else {
+                        displayText("[Err]");
+                        displayText("Value must be between 1 and 250.");
+                    }
                 } else {
                     return intVal;
                 }
@@ -176,6 +182,7 @@ public class View {
     private Material readMaterial(String prompt) {
         while(true) {
             displayText(prompt);
+            displayText("Suitable materials are: MULTISI, MONOSI, AMORSI, CDTE, or CIGS");
             String mat = console.nextLine();
             if (mat.isBlank()) {
                 return null;

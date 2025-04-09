@@ -11,8 +11,8 @@ public class PanelRepositoryDouble implements PanelRepository{
     @Override
     public List<Panel> findAll() {
         List<Panel> panels = new ArrayList<>();
-        panels.add(new Panel(1,"Main",3,4,2017, Material.CdTe, false));
-        panels.add(new Panel(2, "Lower Hill", 2, 3, 2013, Material.MonoSi, false));
+        panels.add(new Panel(1,"Main",3,4,2017, Material.CDTE, false));
+        panels.add(new Panel(2, "Lower Hill", 2, 3, 2013, Material.MONOSI, false));
         panels.add(new Panel(3, "Upper Hill", 1, 1, 2024, Material.CIGS, true));
 
         return panels;

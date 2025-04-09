@@ -1,7 +1,6 @@
 package learn.solar.domain;
 
 import learn.solar.data.DataException;
-import learn.solar.data.PanelRepository;
 import learn.solar.data.PanelRepositoryDouble;
 import learn.solar.models.Material;
 import learn.solar.models.Panel;
@@ -26,7 +25,7 @@ class PanelServiceTest {
         assertEquals(3, actual.get(0).getRow());
         assertEquals(4, actual.get(0).getColumn());
         assertEquals(2017, actual.get(0).getInstallationYear());
-        assertEquals(Material.CdTe, actual.get(0).getMaterial());
+        assertEquals(Material.CDTE, actual.get(0).getMaterial());
         assertFalse(actual.get(0).isTracking());
     }
 
@@ -42,6 +41,18 @@ class PanelServiceTest {
         assertNotNull(actual);
         assertTrue(actual.isSuccess());
         assertEquals(4, actual.getPanel().getId());
+    }
+
+    @Test
+    void shouldNotAddDuplicatePanel() throws DataException {
+        PanelResult should = service.add(new Panel(0, "Main", 1, 1, 2017, Material.CIGS, true));
+        assertTrue(should.isSuccess());
+        assertNotNull(should.getPanel());
+
+        PanelResult actual = service.add(new Panel(4, "Main", 1, 1, 2023, Material.MONOSI, true));
+        assertFalse(actual.isSuccess());
+        assertNull(actual.getPanel());
+        assertEquals("Cannot create an existing panel.", actual.getMessages().get(0));
     }
 
     @Test

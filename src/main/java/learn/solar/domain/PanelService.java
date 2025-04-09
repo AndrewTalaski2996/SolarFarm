@@ -54,18 +54,6 @@ public class PanelService {
             return result;
         }
 
-        boolean sectionIsValid = false;
-        for (Panel p : repository.findAll()) {
-            if (p.getSection().equalsIgnoreCase(panel.getSection())) {
-                sectionIsValid = true;
-                break;
-            }
-        }
-        if (!sectionIsValid) {
-            result.addMessage("Section does not exist.");
-            return result;
-        }
-
         boolean updated = repository.update(panel);
         if (!updated) {
             result.addMessage("Panel does not exist.");
@@ -97,7 +85,7 @@ public class PanelService {
         if (panel.getColumn() < 1 || panel.getColumn() > 250) {
             result.addMessage("Column must be a positive value less than 250.");
         }
-        if (panel.getInstallationYear() >= Year.now().getValue()) {
+        if (panel.getInstallationYear() > Year.now().getValue()) {
             result.addMessage("Installation Year must be a date before " + Year.now().getValue());
         }
         if (panel.getMaterial() == null) {

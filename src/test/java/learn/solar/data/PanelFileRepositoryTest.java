@@ -32,8 +32,8 @@ class PanelFileRepositoryTest {
     /*
     id,section,row,column,installationYear,material,tracking
 1,"Main",1,1,2018,CIGS,true
-2,"Upper Hill",1,2,2014,AmorSi,true
-3,"Lower Hill",2,3,2017,CdTe,false
+2,"Upper Hill",1,2,2014,AMORSI,true
+3,"Lower Hill",2,3,2017,CDTE,false
      */
 
     @Test
@@ -64,7 +64,7 @@ class PanelFileRepositoryTest {
         panel.setRow(2);
         panel.setColumn(1);
         panel.setInstallationYear(2016);
-        panel.setMaterial(Material.CdTe);
+        panel.setMaterial(Material.CDTE);
         panel.setTracking(true);
 
         Panel actual = repository.add(panel);

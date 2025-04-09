@@ -1,8 +1,10 @@
 id,section,row,column,installationYear,material,tracking
-1,Main,1,1,2018,CIGS,true
-2,Upper Hill,1,2,2014,AmorSi,true
-3,Lower Hill,2,3,2017,CdTe,false
-4,Main,1,4,2023,MonoSi,true
-5,Main,2,3,2018,MonoSi,false
+1,2,1,1,2019,CIGS,false
+2,Upper Hill,1,2,2014,AMORSI,true
+3,Lower Hill,2,3,2017,CDTE,false
+4,Main,1,4,2023,MONOSI,true
+5,Main,2,3,2018,MONOSI,false
 6,Main,2,2,2023,CIGS,false
 7,Test,1,23,2001,CIGS,true
+8,Main,1,7,2019,MONOSI,true
+9,Main,1,6,2018,MULTISI,true

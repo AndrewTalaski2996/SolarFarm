@@ -48,6 +48,9 @@ public class Controller {
                 case 4:
                     deletePanel();
                     break;
+                default:
+                    view.displayText("This is not a valid choice.");
+                    break;
             }
         }
     }
@@ -76,16 +79,24 @@ public class Controller {
 
         String section = view.readSection("Section: ");
         Panel panel = view.choosePanel(section, service.findAll());
-        PanelResult result = service.update(panel);
+        PanelResult isNull = new PanelResult();
+        if (panel == null) {
+            isNull.addMessage("Cannot update non-existent panel.");
+            view.printResult(isNull);
+        } else {
+            PanelResult result = service.update(panel);
 
-        if (result.isSuccess()) {
-            Panel updated = view.update(panel);
-            PanelResult updatedResult = service.update(updated);
-            if (updatedResult.isSuccess()) {
-                view.printResult(updatedResult);
-                view.displayText("Panel " + updated.getSection() + "-" + updated.getRow() + "-" + updated.getColumn() + " was updated.");
+            if (result.isSuccess()) {
+                Panel updated = view.update(panel);
+                PanelResult updatedResult = service.update(updated);
+                if (updatedResult.isSuccess()) {
+                    view.printResult(updatedResult);
+                    view.displayText("Panel " + updated.getSection() + "-" + updated.getRow() + "-" + updated.getColumn() + " was updated.");
+                } else {
+                    view.printResult(updatedResult);
+                }
             } else {
-                view.printResult(updatedResult);
+                view.printResult(result);
             }
         }
     }
@@ -94,11 +105,17 @@ public class Controller {
         view.printHeader("Remove a Panel");
         String section = view.readSection("Section: ");
         Panel toRemove = view.choosePanel(section, service.findAll());
-        PanelResult result = service.deleteById(toRemove.getId());
-        view.printResult(result);
+        PanelResult result = new PanelResult();
+        if (toRemove == null) {
+            result.addMessage("Panel to remove does not exist.");
+            view.printResult(result);
+        } else {
+            result = service.deleteById(toRemove.getId());
+            view.printResult(result);
 
-        if (result.isSuccess()) {
-            view.displayText("Panel " + toRemove.getSection() + "-" + toRemove.getRow() + "-" + toRemove.getColumn() + " was removed.");
+            if (result.isSuccess()) {
+                view.displayText("Panel " + toRemove.getSection() + "-" + toRemove.getRow() + "-" + toRemove.getColumn() + " was removed.");
+            }
         }
     }
 }
