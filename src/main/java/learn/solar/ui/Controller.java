@@ -49,7 +49,8 @@ public class Controller {
                     deletePanel();
                     break;
                 default:
-                    view.displayText("This is not a valid choice.");
+                    view.displayText("[Err]");
+                    view.displayText("Please choose a valid option.");
                     break;
             }
         }

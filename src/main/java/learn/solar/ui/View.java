@@ -80,11 +80,11 @@ public class View {
             panel.setSection(section);
         }
         int row = readInt("Row (" + panel.getRow() + "): ", 251);
-        if (row != 0) {
+        if (row != -1) {
             panel.setRow(row);
         }
         int col = readInt("Column (" + panel.getColumn() + "): ", 251);
-        if (col != 0) {
+        if (col != -1) {
             panel.setColumn(col);
         }
         Material material = readMaterial("Material (" + panel.getMaterial() + "): ");
@@ -92,7 +92,7 @@ public class View {
             panel.setMaterial(material);
         }
         int installYear = readInt("Installation Year (" + panel.getInstallationYear() + "): ");
-        if (installYear != 0) {
+        if (installYear != -1) {
             panel.setInstallationYear(installYear);
         }
 
@@ -132,7 +132,7 @@ public class View {
             displayText(prompt);
             String intValue = console.nextLine();
             if (intValue.isBlank()) {
-                return 0;
+                return -1;
             }
             try {
                 int val = Integer.parseInt(intValue);
@@ -156,7 +156,7 @@ public class View {
             displayText(prompt);
             String string = console.nextLine();
             if (string.isBlank()) {
-                return 0;
+                return -1;
             }
             try {
                 int intVal = Integer.parseInt(string);
